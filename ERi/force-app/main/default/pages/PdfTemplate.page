@@ -1,0 +1,123 @@
+<apex:page standardController="Order" renderAs="pdf" extensions="PdfController">
+    <div style="position: relative;">
+        <apex:outputText style="font-weight: 700;" value="{!Order.Cliente__r.Name}"></apex:outputText>
+        <br/>
+        <apex:outputText value="{!Order.Cliente__r.MailingStreet}"></apex:outputText>
+        <br/>
+        <apex:outputText value="{!Order.Cliente__r.MailingPostalCode}"></apex:outputText>
+        &nbsp;
+        <apex:outputText value="{!Order.Cliente__r.MailingCity}"></apex:outputText>
+        <br/>
+        <apex:outputText value="{!Order.Cliente__r.MailingCountry}"></apex:outputText>
+    </div>
+    <br/>
+    <div style="position: absolute; top: 0; right: 0;">
+        <apex:image width="100" height="110" value="{!URLFOR($Resource.ERi, '/ERi/img/eri.png')}"/>
+    </div>
+    <table role="grid" width="100%" style="margin-top: 70px;">
+        <thead>
+            <tr>
+              <th scope="col">
+                <p title="Contribuinte">Contribuinte</p>
+              </th>
+              <th scope="col">
+                <p title="Cliente">Cliente</p>
+              </th>
+            </tr>
+          </thead>
+        <apex:repeat value="{!ordItem}" var="ord">
+            <tbody>
+                <tr>
+                    <th data-label="Produto" scope="row">
+                      <div title="{!Order.Cliente__r.NIF__c}">{!Order.Cliente__r.NIF__c}</div>
+                    </th>
+                    <td data-label="Cliente">
+                      <div title="!Order.Cliente__r.Name">{!Order.Cliente__r.Name}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </apex:repeat>
+    </table>
+    <table role="grid" width="100%" style="margin-top: 30px;">
+        <thead style="background-color: #efefef;">
+            <tr>
+              <th scope="col">
+                <div title="Produto">Produto</div>
+              </th>
+              <th scope="col">
+                <div title="Preço">Preço</div>
+              </th>
+              <th scope="col">
+                <div title="Quantidade">Quantidade</div>
+              </th>
+            </tr>
+          </thead>
+        <apex:repeat value="{!ordItem}" var="ord">
+            <tbody>
+                <tr>
+                    <th data-label="Produto" scope="row">
+                      <div title="{!ord.Product2.Name}">{!ord.Product2.Name}</div>
+                    </th>
+                    <td data-label="Preço">
+                      <div title="{!ord.UnitPrice}">{!ord.UnitPrice}</div>
+                    </td>
+                    <td data-label="Quantidade">
+                        <div title="{!ord.Quantity}">{!ord.Quantity}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </apex:repeat>
+    </table>
+    <div style="margin-top: 70px;">
+        <hr/>
+        <p>Os Artigos e/ou Serviços faturados foram colocados/efetuados à disposição do adquirente à {!Order.EffectiveDate}</p>
+    </div>
+    <table role="grid" width="60%" style="margin-top: 70px;">
+        <h2>Resumo de Impostos</h2>
+        <thead>
+            <tr>
+              <th scope="col">
+                <p title="Designação">Designação</p>
+              </th>
+              <th scope="col">
+                <p title="Valor">Valor</p>
+              </th>
+              <th scope="col">
+                <p title="Incidência">Incidência</p>
+              </th>
+              <th scope="col">
+                <p title="Total">Total</p>
+              </th>
+            </tr>
+          </thead>
+        <apex:repeat value="{!ordItem}" var="ord">
+            <tbody>
+                <tr>
+                    <th data-label="Produto" scope="row">
+                      <div title="IVA Normal">IVA Normal</div>
+                    </th>
+                    <td data-label="Cliente">
+                      <div title="23%">23%</div>
+                    </td>
+                    <td data-label="Cliente">
+                      <div title="18,45€">18,45€</div>
+                    </td>
+                    <td data-label="Cliente">
+                      <div title="3,45€">3,45€</div>
+                    </td>
+                </tr>
+            </tbody>
+        </apex:repeat>
+    </table>
+    <div style="float: right;">
+        <p>Total Ilíq.&nbsp;18,45€</p>
+        <p>IVA Normal&nbsp;3,45€</p>
+        <p>Total do documento&nbsp;15,00€</p>
+        <p><b>Total Pago&nbsp;15,00€</b></p>
+    </div>
+    <div style="margin-top: 200px;">
+        <p>Gratos pela preferência</p>
+        <hr/>
+        <p>ERi - Equipamentos Reutilizáveis da Beira Interior</p>
+    </div>
+</apex:page>

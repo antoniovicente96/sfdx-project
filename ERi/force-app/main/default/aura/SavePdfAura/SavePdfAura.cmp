@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,force:hasSObjectName" access="global" controller="PdfController">
+    <div class="slds-is-relative">
+        <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="Save PDF" label="Save PDF" onclick="{!c.myAction}"/>
+    </div>
+</aura:component>

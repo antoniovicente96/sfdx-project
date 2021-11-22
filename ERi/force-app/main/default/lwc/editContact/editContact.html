@@ -1,0 +1,35 @@
+<template>
+    <div class="wrapper slds-is-relative">
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
+        </template>
+        <div class="slds-grid header">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:contact"
+                        size="medium"
+                        alternative-text="Indicates approval"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body" if:true={contact.data}>
+                      <p class="slds-text-title_caps slds-line-height_reset">Edit Contact</p>
+                      <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate">{name}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <lightning-record-edit-form object-api-name="Contact" record-id={recordId} onsubmit={handleLoad} onsuccess={handleLoad}>
+                <lightning-input-field field-name="FirstName"></lightning-input-field>
+                <lightning-input-field field-name="LastName"></lightning-input-field>
+                <lightning-input-field field-name="Email"></lightning-input-field>
+                <lightning-input-field field-name="Phone"></lightning-input-field>
+                <lightning-input-field field-name="NIF__c"></lightning-input-field>
+                <lightning-input-field field-name="MailingAddress"></lightning-input-field>
+                <div class="">
+                    <lightning-button variant="brand" type="submit" label="UPDATE"></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </div>
+</template>
